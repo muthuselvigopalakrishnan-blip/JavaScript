@@ -6,6 +6,43 @@
     <title>Product details</title>
 </head>
 <body>
+    <div id="productContainer"></div>
+
+    <script>
+        const container = document.getElementById("productContainer");
+
+       
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+
+        if (!id) {
+            container.innerHTML = "<p class='error'>No product ID found.</p>";
+        } else {
+
+            
+            fetch(`https://fakestoreapi.com/products/${id}`)
+                .then(res => res.json())
+                .then(product => {
+
+                 
+                    container.innerHTML = `
+                        <div class="product">
+                            <img src="${product.image}" alt="${product.title}">
+                            <div class="details">
+                                <h2>${product.title}</h2>
+                                <p class="price">$${product.price}</p>
+                                <p>Rating: ${product.rating.rate}</p>
+                                <p>${product.description}</p>
+                                <p><strong>Category:</strong> ${product.category}</p>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(() => {
+                    container.innerHTML = "<p class='error'>Product not found.</p>";
+                });
+        }
+    </script>
     
 </body>
 </html>
