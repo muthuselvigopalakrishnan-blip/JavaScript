@@ -2,90 +2,90 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
 
-  <style>
-    body {
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+    <style>
+        body {
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    h1 {
-      text-align: center;
-      margin: 30px 0;
-    }
+        h1 {
+            text-align: center;
+            margin: 30px 0;
+        }
 
-    #demo {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      justify-content: center;
-    }
+        #demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
 
-    .card {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      transition: 0.3s ease;
-      width: 250px;
-      text-align: center;
-    }
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: 0.3s ease;
+            width: 250px;
+            text-align: center;
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
 
-    .card img {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
+        .card img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
 
-    .price {
-      font-weight: bold;
-      color: #3cb6b8;
-      font-size: 18px;
-    }
+        .price {
+            font-weight: bold;
+            color: #3cb6b8;
+            font-size: 18px;
+        }
 
-    .rating {
-      color: #ff9800;
-    }
+        .rating {
+            color: #ff9800;
+        }
 
-    .category {
-      font-size: 13px;
-      color: gray;
-    }
-  </style>
+        .category {
+            font-size: 13px;
+            color: gray;
+        }
+    </style>
 </head>
 
 <body>
 
-  <h1>Products</h1>
-  <div id="demo"></div>
+    <h1>Products</h1>
+    <div id="demo"></div>
 
-  <script>
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(data => {
-        display(data);
-      })
-      .catch(error => console.log(error));
+    <script>
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(data => {
+                display(data);
+            })
+            .catch(error => console.log(error));
 
-    function display(products) {
-      const container = document.getElementById("demo");
+        function display(products) {
+            const container = document.getElementById("demo");
 
-      products.forEach(item => {
-        const card = document.createElement("div");
-        card.classList.add("card");
+            products.forEach(item => {
+                const card = document.createElement("div");
+                card.classList.add("card");
 
-        card.innerHTML = `
+                card.innerHTML = `
           <h3>${item.title}</h3>
           <img src="${item.image}" alt="${item.title}">
           <p class="price"> ${item.price}</p>
@@ -93,11 +93,20 @@
           <p class="rating">${item.rating.rate} (${item.rating.count})</p>
           <p class="category">${item.category}</p>
         `;
+              
+                card.addEventListener("click", () => {
+                    window.location.href = `product.html?id=${item.id}`;
 
-        container.appendChild(card);
-      });
-    }
-  </script>
+                }
+                );
+
+
+
+                container.appendChild(card);
+            });
+        }
+    </script>
 
 </body>
+
 </html>
